@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verificação</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: #031009;
+    color: white;
+    overflow: hidden;
+}
+
+.bg {
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 20%, #00ff6640, transparent 30%),
+        radial-gradient(circle at 80% 80%, #00ff6630, transparent 30%);
+    animation: bg 5s infinite alternate;
+}
+
+@keyframes bg {
+    from { transform: scale(1); }
+    to { transform: scale(1.15); }
+}
+
+.card {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    padding: 35px 25px;
+    text-align: center;
+    background: #081a10e8;
+    border: 1px solid #00ff6650;
+    border-radius: 24px;
+    box-shadow: 0 0 40px #00ff6620;
+    animation: aparecer .8s ease;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.icon {
+    width: 85px;
+    height: 85px;
+    margin: auto auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid #00ff66;
+    color: #00ff66;
+    font-size: 42px;
+    box-shadow: 0 0 30px #00ff6640;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    50% {
+        transform: scale(1.08);
+        box-shadow: 0 0 45px #00ff6670;
+    }
+}
+
+h1 {
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+
+p {
+    color: #9baaa0;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+button {
+    width: 100%;
+    padding: 16px;
+    border: 0;
+    border-radius: 12px;
+    background: #00e65f;
+    color: #031009;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .25s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px #00ff6660;
+}
+
+button:active {
+    transform: scale(.96);
+}
+
+#loading,
+#success {
+    display: none;
+}
+
+.spinner {
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 20px;
+    border: 4px solid #ffffff20;
+    border-top-color: #00ff66;
+    border-radius: 50%;
+    animation: girar .8s linear infinite;
+}
+
+@keyframes girar {
+    to { transform: rotate(360deg); }
+}
+
+.check {
+    width: 85px;
+    height: 85px;
+    margin: auto auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #00e65f;
+    color: #031009;
+    font-size: 45px;
+    font-weight: bold;
+    animation: sucesso .6s ease;
+}
+
+@keyframes sucesso {
+    0% { transform: scale(0); }
+    70% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.verde {
+    color: #00ff66;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<div class="card">
+
+    <div id="inicio">
+        <div class="icon">✓</div>
+
+        <h1>Verificação</h1>
+
+        <p>
+            Clique no botão abaixo para realizar
+            sua verificação.
+        </p>
+
+        <button onclick="verificar()">
+            Verificar agora
+        </button>
+    </div>
+
+    <div id="loading">
+        <div class="spinner"></div>
+
+        <h1>Verificando...</h1>
+
+        <p>
+            Aguarde enquanto realizamos a verificação.
+        </p>
+    </div>
+
+    <div id="success">
+        <div class="check">✓</div>
+
+        <h1>Verificado!</h1>
+
+        <p>
+            Sua verificação foi concluída
+            <span class="verde">com sucesso.</span>
+        </p>
+
+        <button onclick="location.reload()">
+            Continuar
+        </button>
+    </div>
+
+</div>
+
+<script>
+function verificar() {
+
+    document.getElementById("inicio").style.display = "none";
+    document.getElementById("loading").style.display = "block";
+
+    setTimeout(function() {
+
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("success").style.display = "block";
+
+    }, 2500);
+}
+</script>
+
+</body>
+</html>
